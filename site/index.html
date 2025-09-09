@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nebraskache — Coming Soon</title>
+    <meta name="description"
+        content="Nebraskache is Nebraska's geocaching community — promoting, organizing, and connecting geocachers across the state.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Social / Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Nebraskache — Coming Soon">
+    <meta property="og:description"
+        content="We are hiding something new for you soon. Join Nebraska's geocaching community.">
+    <meta property="og:image" content="nebraskache.jpg">
+    <meta property="og:image:alt" content="Nebraskache logo">
+    <meta property="og:site_name" content="Nebraskache">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Nebraskache — Coming Soon">
+    <meta name="twitter:description"
+        content="We are hiding something new for you soon. Join Nebraska's geocaching community.">
+    <meta name="twitter:image" content="nebraskache.jpg">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* Design tokens */
+        :root {
+            --bg: #0e1a12;
+            /* deep green-black */
+            --panel: #101f15;
+            /* slightly lighter panel */
+            --text: #e9f4ec;
+            /* near-white with green tint */
+            --muted: #a8c3b1;
+            /* muted text */
+            --brand: #2fb36f;
+            /* geocaching-inspired green */
+            --brand-600: #219f60;
+            /* darker hover */
+            --accent: #7cd39b;
+            /* accent for subtle lines */
+            --ring: rgba(47, 179, 111, 0.35);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+            background: radial-gradient(1200px 800px at 80% 10%, rgba(47, 179, 111, 0.12), transparent 60%),
+                radial-gradient(1000px 700px at 20% 90%, rgba(124, 211, 155, 0.08), transparent 60%),
+                var(--bg);
+            color: var(--text);
+            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            margin: 0;
+            display: grid;
+            place-items: center;
+        }
+
+        .wrap {
+            width: 100%;
+            max-width: 960px;
+            padding: 6rem 1.25rem 3rem;
+        }
+
+        .card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+            border: 1px solid rgba(124, 211, 155, 0.18);
+            border-radius: 16px;
+            backdrop-filter: blur(6px);
+            padding: 2.25rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        }
+
+        .logo-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .logo {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 1px solid rgba(124, 211, 155, 0.25);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+        }
+
+        .brand {
+            font-weight: 700;
+            letter-spacing: 0.2px;
+            font-size: 1.25rem;
+        }
+
+        .headline {
+            margin-top: 0.25rem;
+            font-size: 2rem;
+            line-height: 1.2;
+            font-weight: 700;
+        }
+
+        .lede {
+            margin-top: 0.75rem;
+            color: var(--muted);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .cta-row {
+            margin-top: 1.75rem;
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-radius: 10px;
+            padding: 0.8rem 1rem;
+            border: 1px solid rgba(124, 211, 155, 0.25);
+            color: var(--text);
+            text-decoration: none;
+            transition: all 160ms ease;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+        }
+
+        .cta.primary {
+            background: linear-gradient(180deg, var(--brand), var(--brand-600));
+            border-color: transparent;
+            box-shadow: 0 6px 18px var(--ring);
+        }
+
+        .cta:hover {
+            transform: translateY(-1px);
+        }
+
+        .cta:active {
+            transform: translateY(0);
+        }
+
+        .meta-row {
+            margin-top: 2rem;
+            padding-top: 1.25rem;
+            border-top: 1px dashed rgba(124, 211, 155, 0.25);
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .meta {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .meta strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        footer {
+            margin-top: 2rem;
+            color: var(--muted);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        /* small screens */
+        @media (max-width: 640px) {
+            .wrap {
+                padding-top: 3.5rem;
+            }
+
+            .headline {
+                font-size: 1.6rem;
+            }
+
+            .meta-row {
+                grid-template-columns: 1fr;
+            }
+
+            .logo {
+                width: 48px;
+                height: 48px;
+                border-radius: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="wrap">
+        <section class="card" aria-label="Nebraskache coming soon">
+            <div class="logo-row">
+                <img src="nebraskache.jpg" alt="Nebraskache logo" class="logo">
+                <div class="brand">Nebraskache</div>
+            </div>
+
+            <h1 class="headline">We are hiding something new for you soon</h1>
+            <p class="lede">
+                Nebraska's geocaching community is building a new home. We promote, organize,
+                and connect geocachers across the state — from the Platte River to the Sandhills.
+                Check back soon for events, resources, and ways to get involved.
+            </p>
+
+            <div class="cta-row">
+                <a class="cta primary" href="mailto:nebraskache@gmail.com">
+                    <i class="fa-solid fa-envelope"></i>
+                    Get in touch
+                </a>
+                <a class="cta" href="https://www.facebook.com/groups/107321656812" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-facebook"></i>
+                    Join our group
+                </a>
+                <a class="cta" href="https://www.geocaching.com/" target="_blank" rel="noopener">
+                    <i class="fa-solid fa-compass"></i>
+                    Visit Geocaching.com
+                </a>
+            </div>
+
+            <div class="meta-row" aria-label="Details">
+                <div class="meta"><strong>Community</strong><br>Events, land-use, and local guidelines</div>
+                <div class="meta"><strong>Resources</strong><br>New cacher tips and best practices</div>
+                <div class="meta"><strong>Coordinates</strong><br>N 41° 29.000′ · W 99° 54.000′</div>
+            </div>
+        </section>
+
+        <footer>© 2025 Nebraskache. All rights reserved.</footer>
+    </main>
+</body>
+
+</html>
