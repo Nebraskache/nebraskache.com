@@ -1,0 +1,46 @@
+name: Update Nebraska Events GPX
+
+on:
+  schedule:
+    - cron: "0 11 * * *" # 6am US Central (UTC-5/UTC-6 depending on DST; UTC 11:00 is 6am CST, 5am CDT)
+  workflow_dispatch:
+
+jobs:
+  update-gpx:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Download zip file
+        env:
+          REQUEST_HEADERS: ${{ secrets.GEO_PQ_REQUEST_HEADERS }}
+          PQ_ID: ${{ secrets.GEO_PQ_NE_EVENTS_ID }}
+        run: |
+          # REQUEST_HEADERS should be a JSON object, e.g. '{"Authorization": "Bearer ...", "X-Api-Key": "..."}'
+          curl \
+            $(echo "$REQUEST_HEADERS" | jq -r 'to_entries[] | "-H \"" + .key + ": " + .value + "\""' | xargs) \
+            -L -o events.zip \
+            "https://www.geocaching.com/pocket/downloadpq.ashx?g=$PQ_ID&src=web"
+
+      - name: Extract GPX file
+        run: |
+          unzip events.zip
+          rm -f *-wpts.gpx
+          mv *nebraska_events.gpx 'data/$nebraska_events.gpx'
+
+      - name: Commit and push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --global user.name 'Nebotska'
+          git config --global user.email 'nebotska@nebraskache.com'
+          git add data/$nebraska_events.gpx
+          if ! git diff --cached --quiet; then
+            git commit -m 'Update published event listing'
+            git push
+          fi
