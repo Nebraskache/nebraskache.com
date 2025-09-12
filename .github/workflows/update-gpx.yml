@@ -17,15 +17,12 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Download zip file
-        env:
-          REQUEST_HEADERS: ${{ secrets.GEO_PQ_REQUEST_HEADERS }}
-          PQ_ID: ${{ secrets.GEO_PQ_NE_EVENTS_ID }}
         run: |
-          # REQUEST_HEADERS should be a JSON object, e.g. '{"Authorization": "Bearer ...", "X-Api-Key": "..."}'
+          # REQUEST_HEADERS should be in curl format, e.g. -H "Cookie: xxx" -H "User-Agent: yyy"
           curl \
-            $(echo "$REQUEST_HEADERS" | jq -r 'to_entries[] | "-H \"" + .key + ": " + .value + "\""' | xargs) \
+            ${{ secrets.GEO_PQ_REQUEST_HEADERS }} \
             -L -o events.zip \
-            "https://www.geocaching.com/pocket/downloadpq.ashx?g=$PQ_ID&src=web"
+            "https://www.geocaching.com/pocket/downloadpq.ashx?g=${{ secrets.GEO_PQ_NE_EVENTS_ID }}&src=web"
 
       - name: Extract GPX file
         run: |
