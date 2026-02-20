@@ -2,6 +2,8 @@ export interface GeoEvent {
 	gcCode: string;
 	name: string;
 	date: string;
+	startTime: string;
+	endTime: string;
 	lat: number;
 	lon: number;
 	type: string;

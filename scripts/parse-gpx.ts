@@ -18,6 +18,14 @@ function stripHtml(html: string): string {
 		.trim();
 }
 
+function parseStartAndEndTime(shortDesc: string): { startTime: string, endTime: string } {
+	const [start, end] = shortDesc.split('-');
+	const startTime = new Date(start + ' UTC');
+	const endTime = new Date(start.replace(/\d\d:\d\d/, end) + ' UTC');
+
+	return { startTime: startTime.toISOString(), endTime: endTime.toISOString() };
+}
+
 function parseGpx(): GeoEvent[] {
 	if (!existsSync(GPX_PATH)) {
 		console.warn(`GPX file not found at ${GPX_PATH}, writing empty events.`);
@@ -49,7 +57,7 @@ function parseGpx(): GeoEvent[] {
 				const cache = wpt.cache as Record<string, unknown> | undefined;
 				if (!cache) return null;
 
-				const eventDate = new Date(wpt.time as string);
+				const eventDate = new Date((wpt.time + 'Z') as string);
 				if (isNaN(eventDate.getTime())) return null;
 
 				const shortDescRaw = (cache.short_description as string) ?? '';
@@ -57,6 +65,8 @@ function parseGpx(): GeoEvent[] {
 					typeof shortDescRaw === 'object'
 						? stripHtml(String((shortDescRaw as Record<string, unknown>)['#text'] ?? ''))
 						: stripHtml(shortDescRaw);
+
+				const { startTime, endTime } = parseStartAndEndTime(shortDesc);
 
 				const longDescRaw = (cache.long_description as string) ?? '';
 				const longDesc =
@@ -68,6 +78,8 @@ function parseGpx(): GeoEvent[] {
 					gcCode: String(wpt.name ?? ''),
 					name: String(cache.name ?? wpt.urlname ?? ''),
 					date: eventDate.toISOString(),
+					startTime: String(startTime ?? ''),
+					endTime: String(endTime ?? ''),
 					lat: Number(wpt['@_lat']),
 					lon: Number(wpt['@_lon']),
 					type: String(cache.type ?? 'Event'),

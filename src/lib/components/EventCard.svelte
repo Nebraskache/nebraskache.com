@@ -5,11 +5,14 @@
 	let { event }: { event: GeoEvent } = $props();
 
 	let date = $derived(new Date(event.date));
-	let month = $derived(date.toLocaleDateString('en-US', { month: 'short' }));
-	let day = $derived(date.getDate());
-	let year = $derived(date.getFullYear());
-	let time = $derived(date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }));
-	let weekday = $derived(date.toLocaleDateString('en-US', { weekday: 'long' }));
+	let month = $derived(date.toLocaleDateString('en-US', { month: 'short', timeZone: 'UTC' }));
+	let day = $derived(date.getUTCDate());
+	let year = $derived(date.getUTCFullYear());
+	let time = $derived(date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'UTC' }));
+	let weekday = $derived(date.toLocaleDateString('en-US', { weekday: 'long', timeZone: 'UTC' }));
+
+	let startTime = $derived(new Date(event.startTime).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'UTC' }));
+	let endTime = $derived(new Date(event.endTime).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'UTC' }));
 
 	function formatCoord(lat: number, lon: number): string {
 		const latDir = lat >= 0 ? 'N' : 'S';
@@ -47,7 +50,7 @@
 		<div class="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-trail-gray sm:text-sm">
 			<span class="flex items-center gap-1">
 				<Calendar size={14} class="text-prairie-green-50" />
-				{weekday} at {time}
+				{weekday}, {startTime} - {endTime}
 			</span>
 			{#if event.placedBy}
 				<span class="flex items-center gap-1">
@@ -55,15 +58,14 @@
 					{event.placedBy}
 				</span>
 			{/if}
+		</div>
+
+		<div class="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-trail-gray sm:text-sm">
 			<span class="flex items-center gap-1">
 				<MapPin size={14} class="text-prairie-green-50" />
 				{formatCoord(event.lat, event.lon)}
 			</span>
 		</div>
-
-		{#if event.shortDescription}
-			<p class="mt-2 line-clamp-2 text-sm text-trail-gray">{event.shortDescription}</p>
-		{/if}
 
 		<div class="mt-3">
 			<a
