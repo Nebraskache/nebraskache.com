@@ -3,6 +3,19 @@
   import EventCard from "$lib/components/EventCard.svelte";
 
   let { data } = $props();
+
+  // Set filter date to yesterday
+  const placedAfterDate = new Date();
+  placedAfterDate.setDate(placedAfterDate.getDate() - 1);
+  const geoSearchLink = `https://www.geocaching.com/play/results?sort=placeDate&asc=true&st=Nebraska%2C+United+States&ot=region&oid=28&r=10&ct=6%2C13%2C453%2C7005%2C4738%2C3774%2C1304%2C3653&sd=0&pad=${placedAfterDate
+    .toLocaleDateString("en-GB", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit"
+    })
+    .split("/")
+    .reverse()
+    .join("-")}`;
 </script>
 
 <svelte:head>
@@ -32,15 +45,7 @@
       Events are updated daily from Geocaching.com. For the most up-to-date
       information, please search
       <a
-        href="https://www.geocaching.com/play/results?sort=placeDate&asc=true&st=Nebraska%2C+United+States&ot=region&oid=28&r=10&ct=6%2C13%2C453%2C7005%2C4738%2C3774%2C1304%2C3653&sd=0&pad={new Date()
-          .toLocaleDateString('en-GB', {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit'
-          })
-          .split('/')
-          .reverse()
-          .join('-')}"
+        href={geoSearchLink}
         target="_blank"
         rel="noopener noreferrer"
         class="font-medium text-prairie-green hover:text-prairie-gold">
@@ -75,15 +80,7 @@
           We don't know about any upcoming geocaching events in Nebraska right
           now. Check back soon, or visit
           <a
-            href="https://www.geocaching.com/play/results?sort=placeDate&asc=true&st=Nebraska%2C+United+States&ot=region&oid=28&r=10&ct=6%2C13%2C453%2C7005%2C4738%2C3774%2C1304%2C3653&sd=0&pad={new Date()
-              .toLocaleDateString('en-GB', {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit'
-              })
-              .split('/')
-              .reverse()
-              .join('-')}"
+            href={geoSearchLink}
             target="_blank"
             rel="noopener noreferrer"
             class="font-medium text-prairie-green hover:text-prairie-gold">
