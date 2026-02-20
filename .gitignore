@@ -1,9 +1,14 @@
+# SvelteKit
+.svelte-kit/
+
+# Generated data (rebuilt from GPX at build time)
+src/lib/data/events.json
+
 # Dependencies
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-package-lock.json
 yarn.lock
 
 # Build outputs
