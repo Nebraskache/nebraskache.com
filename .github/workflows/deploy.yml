@@ -3,10 +3,10 @@ name: Build and Deploy to GitHub Pages
 on:
   push:
     branches: [main]
-  # workflow_run:
-  #   workflows: ["Update Nebraska Events GPX"]
-  #   types: [completed]
-  #   branches: [main]
+  workflow_run:
+    workflows: ["Update Nebraska Events GPX"]
+    types: [completed]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
