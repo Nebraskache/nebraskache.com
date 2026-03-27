@@ -58,6 +58,13 @@
           </li>
           <li>
             <a
+              href="/minutes"
+              class="text-white/80 transition-colors hover:text-white">
+              Meeting Minutes
+            </a>
+          </li>
+          <li>
+            <a
               href="/bylaws"
               class="text-white/80 transition-colors hover:text-white">
               Bylaws

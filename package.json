@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev",
-    "build": "tsx scripts/parse-gpx.ts && vite build",
+    "build": "tsx scripts/parse-gpx.ts && tsx scripts/scan-minutes.ts && vite build",
     "preview": "vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "parse-gpx": "tsx scripts/parse-gpx.ts"

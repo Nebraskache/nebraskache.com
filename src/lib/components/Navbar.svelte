@@ -10,6 +10,7 @@
     { href: "/about", label: "About" },
     { href: "/membership", label: "Membership" },
     { href: "/feedback", label: "Feedback" },
+    { href: "/minutes", label: "Meeting Minutes" },
     { href: "/bylaws", label: "Bylaws" }
   ];
 

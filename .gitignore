@@ -1,8 +1,9 @@
 # SvelteKit
 .svelte-kit/
 
-# Generated data (rebuilt from GPX at build time)
+# Generated data (rebuilt at build time)
 src/lib/data/events.json
+src/lib/data/meeting-minutes.json
 
 # Dependencies
 node_modules/
