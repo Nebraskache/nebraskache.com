@@ -3,16 +3,16 @@
 
   const committee = [
     {
-      realName: "Ray Jelinek",
-      name: "CRKAT",
-      role: "President",
-      initials: "CR"
-    },
-    {
       realName: "Jordan Judt",
       name: "JavaJudt",
-      role: "President-Elect",
+      role: "President",
       initials: "JJ"
+    },
+    {
+      realName: "LA Newell",
+      name: "J&LA",
+      role: "President-Elect",
+      initials: "JL"
     },
     {
       realName: "Janice Hueske",
@@ -21,22 +21,22 @@
       initials: "LG"
     },
     {
-      realName: "Francis Ibero",
-      name: "fsibero",
+      realName: "Cheryl Sheldon",
+      name: "seashell_dawn",
       role: "Area 1 Representative",
-      initials: "FS"
+      initials: "SD"
     },
     {
-      realName: "Steve Bradley",
+      realName: "Martin Bradley",
       name: "Undertaker54andwife",
       role: "Area 2 Representative",
       initials: "UT"
     },
     {
-      realName: "Sharon Mumaugh",
-      name: "starsharon + Hubbie",
+      realName: "Chris Brennfoerder",
+      name: "kc0aoo",
       role: "Area 3 Representative",
-      initials: "SS"
+      initials: "KC"
     },
     {
       realName: "Lynn Litherland",
@@ -45,16 +45,16 @@
       initials: "LC"
     },
     {
+      realName: "Ray Jelinek",
+      name: "CRKAT",
+      role: "Past President",
+      initials: "CR"
+    },
+    {
       realName: "Coby Boring",
       name: "TwoFingersDown",
       role: "Past President",
       initials: "TF"
-    },
-    {
-      realName: "Janet Brandt",
-      name: "peteach!",
-      role: "Past President",
-      initials: "PE"
     }
   ];
 
@@ -158,7 +158,7 @@
   <div class="mx-auto max-w-6xl px-4 sm:px-6">
     <div class="mb-10 text-center">
       <h2 class="font-heading text-2xl font-semibold text-prairie-green sm:text-3xl">
-        2025-26 Executive Committee
+        2026-27 Executive Committee
       </h2>
       <p class="mx-auto mt-2 max-w-lg text-trail-gray">
         Nebraskache is led by a volunteer executive committee elected by our
