@@ -18,6 +18,43 @@ jobs:
 
       - name: Download zip file
         run: |
+          REQUEST_VERIFICATION_TOKEN=$(curl -I -s -o /dev/null -w "%header{set-cookie}\n" 'https://www.geocaching.com/account/signin' \
+            -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
+            -H 'Accept-Language: en-US,en;q=0.9' \
+            -H 'Connection: keep-alive' \
+            -H 'Sec-Fetch-Dest: document' \
+            -H 'Sec-Fetch-Mode: navigate' \
+            -H 'Sec-Fetch-Site: none' \
+            -H 'Sec-Fetch-User: ?1' \
+            -H 'Upgrade-Insecure-Requests: 1' \
+            -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36' \
+            -H 'sec-ch-ua: "Not;A=Brand";v="8", "Chromium";v="150", "Google Chrome";v="150"' \
+            -H 'sec-ch-ua-mobile: ?0' \
+            -H 'sec-ch-ua-platform: "Linux"' | awk -F '=' '{print $2}' | awk -F ';' '{print $1}')
+
+          curl 'https://www.geocaching.com/account/signin' \
+            -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
+            -H 'Accept-Language: en-US,en;q=0.9' \
+            -H 'Cache-Control: max-age=0' \
+            -H 'Connection: keep-alive' \
+            -H 'Content-Type: application/x-www-form-urlencoded' \
+            -b "__RequestVerificationToken=$REQUEST_VERIFICATION_TOKEN; _hjSessionUser_441815=$SESSION_USER; _hjSession_441815=$SESSION; _hjHasCachedUserAttributes=true; CookieConsent={stamp:%27VmOGbYlnUup4nZHrHEveDctOQYwRccJ/CmWJif6cCJq8wJY7GrU1KA==%27%2Cnecessary:true%2Cpreferences:false%2Cstatistics:false%2Cmarketing:false%2Cmethod:%27explicit%27%2Cver:3%2Cutc:1788281421241%2Cregion:%27us-31%27}" \
+            -H 'Origin: https://www.geocaching.com' \
+            -H 'Referer: https://www.geocaching.com/account/signin' \
+            -H 'Sec-Fetch-Dest: document' \
+            -H 'Sec-Fetch-Mode: navigate' \
+            -H 'Sec-Fetch-Site: same-origin' \
+            -H 'Sec-Fetch-User: ?1' \
+            -H 'Upgrade-Insecure-Requests: 1' \
+            -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36' \
+            -H 'sec-ch-ua: "Not;A=Brand";v="8", "Chromium";v="150", "Google Chrome";v="150"' \
+            -H 'sec-ch-ua-mobile: ?0' \
+            -H 'sec-ch-ua-platform: "Linux"' \
+            --data "__RequestVerificationToken=$REQUEST_VERIFICATION_TOKEN" \
+            --data 'ReturnUrl=' \
+            --data "UsernameOrEmail=$GEO_USERNAME" \
+            --data "Password=$GEO_PASSWORD"
+
           # REQUEST_HEADERS should be in curl format, e.g. -H "Cookie: xxx" -H "User-Agent: yyy"
           curl \
             ${{ secrets.GEO_PQ_REQUEST_HEADERS }} \
