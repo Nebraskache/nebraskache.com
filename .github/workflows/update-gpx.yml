@@ -2,7 +2,7 @@ name: Update Nebraska Events GPX
 
 on:
   schedule:
-    - cron: "0 11 * * *" # 6am US Central (UTC-5/UTC-6 depending on DST; UTC 11:00 is 6am CST, 5am CDT)
+    - cron: "0 11 * * *" # 6am US Central (UTC-5/UTC-6 depending on DST; UTC 11:00 is 6am CDT, 5am CST)
   workflow_dispatch:
 
 jobs:
@@ -17,12 +17,113 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Download zip file
+        env:
+          GH_TOKEN: ${{ secrets.PAT_UPDATE_SECRETS }}
+          CURRENT_AUTH: ${{ secrets.GEO_GSPK_AUTH }}
+          GEO_USERNAME: ${{ secrets.GEO_USERNAME }}
+          GEO_PASSWORD: ${{ secrets.GEO_PASSWORD }}
         run: |
-          # REQUEST_HEADERS should be in curl format, e.g. -H "Cookie: xxx" -H "User-Agent: yyy"
-          curl \
-            ${{ secrets.GEO_PQ_REQUEST_HEADERS }} \
-            -L -o events.zip \
-            "https://www.geocaching.com/pocket/downloadpq.ashx?g=${{ secrets.GEO_PQ_NE_EVENTS_ID }}&src=web"
+          EXPIRES=$(echo "$CURRENT_AUTH" | jq -r '.expires')
+
+          if [[ -z "$CURRENT_AUTH" || $(date -d "@$EXPIRES" +%s) -lt $(date +%s) ]]; then
+            echo "GSPK_AUTH is missing or expired. Fetching a new one..." >> $GITHUB_STEP_SUMMARY
+
+            # Initial request to get both request verification tokens - one from cookie, and one from the login form
+            echo "Fetching request verification tokens" >> $GITHUB_STEP_SUMMARY
+            RESPONSE=$(curl -s -w "\nSet-Cookie: %header{set-cookie}\n" 'https://www.geocaching.com/account/signin' \
+              -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
+              -H 'Accept-Language: en-US,en;q=0.9' \
+              -H 'Connection: keep-alive' \
+              -H 'Sec-Fetch-Dest: document' \
+              -H 'Sec-Fetch-Mode: navigate' \
+              -H 'Sec-Fetch-Site: none' \
+              -H 'Sec-Fetch-User: ?1' \
+              -H 'Upgrade-Insecure-Requests: 1' \
+              -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36' \
+              -H 'sec-ch-ua: "Not;A=Brand";v="8", "Chromium";v="150", "Google Chrome";v="150"' \
+              -H 'sec-ch-ua-mobile: ?0' \
+              -H 'sec-ch-ua-platform: "Linux"')
+
+            # Extract tokens
+            tokenRegex='input name="__RequestVerificationToken" type="hidden" value="([^"]+)"'
+            cookieRegex='Set-Cookie: __RequestVerificationToken=([^;]+)'
+
+            if [[ "$RESPONSE" =~ $tokenRegex ]]; then 
+              REQUEST_VERIFICATION_TOKEN="${BASH_REMATCH[1]}"
+            else
+              echo "Request verification token not found in the response form." >> $GITHUB_STEP_SUMMARY
+              exit 1
+            fi
+
+            if [[ "$RESPONSE" =~ $cookieRegex ]]; then 
+              COOKIE_VERIFICATION_TOKEN="${BASH_REMATCH[1]}"
+            else
+              echo "Request verification token not found in the response headers." >> $GITHUB_STEP_SUMMARY
+              exit 1
+            fi
+            ###
+
+            # Log in
+            echo "Logging in..." >> $GITHUB_STEP_SUMMARY
+            GSPK_AUTH=$(curl -s -o /dev/null -w "%header{set-cookie}\n" -X POST 'https://www.geocaching.com/account/signin' \
+              -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/jxl,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
+              -H 'Accept-Language: en-US,en;q=0.9' \
+              -H 'Cache-Control: max-age=0' \
+              -H 'Connection: keep-alive' \
+              -H 'Content-Type: application/x-www-form-urlencoded' \
+              -b "__RequestVerificationToken=$COOKIE_VERIFICATION_TOKEN" \
+              -H 'Origin: https://www.geocaching.com' \
+              -H 'Referer: https://www.geocaching.com/account/signin' \
+              -H 'Sec-Fetch-Dest: document' \
+              -H 'Sec-Fetch-Mode: navigate' \
+              -H 'Sec-Fetch-Site: same-origin' \
+              -H 'Sec-Fetch-User: ?1' \
+              -H 'Upgrade-Insecure-Requests: 1' \
+              -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36' \
+              -H 'sec-ch-ua: "Google Chrome";v="155", "Chromium";v="155", "Not(A:Brand";v="24"' \
+              -H 'sec-ch-ua-mobile: ?0' \
+              -H 'sec-ch-ua-platform: "Linux"' \
+              --data-urlencode "__RequestVerificationToken=$REQUEST_VERIFICATION_TOKEN" \
+              --data-urlencode 'ReturnUrl=' \
+              --data-urlencode "UsernameOrEmail=$GEO_USERNAME" \
+              --data-urlencode "Password=$GEO_PASSWORD" | awk -F '=' '{print $2}' | awk -F ';' '{print $1}')
+
+            if [[ -z "$GSPK_AUTH" ]]; then
+              echo "Login failed: GSPK_AUTH not found in the response headers." >> "$GITHUB_STEP_SUMMARY"
+              exit 1
+            fi
+
+            # Save the new GSPK_AUTH to secrets
+            NEW_AUTH=$(jq -n \
+              --arg gspkAuth "$GSPK_AUTH" \
+              --arg expires "$(date -d '+29 days' +%s)" \
+              '{gspkAuth: $gspkAuth, expires: $expires}')
+
+            echo "Saving new GSPK_AUTH to GitHub secrets." >> $GITHUB_STEP_SUMMARY
+            gh secret set GEO_GSPK_AUTH --body "$NEW_AUTH" --repo ${{ github.repository }}
+          else
+            echo "Using existing GSPK_AUTH." >> $GITHUB_STEP_SUMMARY
+            GSPK_AUTH=$(echo "$CURRENT_AUTH" | jq -r '.gspkAuth')
+            echo "::add-mask::$GSPK_AUTH"
+          fi
+
+          # Download the events GPX file
+          echo "Downloading GPX" >> $GITHUB_STEP_SUMMARY
+          curl -s -L -o events.zip "https://www.geocaching.com/pocket/downloadpq.ashx?g=${{ secrets.GEO_PQ_NE_EVENTS_ID }}&src=web" \
+            -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/jxl,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
+            -H 'Accept-Language: en-US,en;q=0.9' \
+            -H 'Connection: keep-alive' \
+            -b "gspkauth=$GSPK_AUTH;" \
+            -H 'Referer: https://www.geocaching.com/pocket/' \
+            -H 'Sec-Fetch-Dest: document' \
+            -H 'Sec-Fetch-Mode: navigate' \
+            -H 'Sec-Fetch-Site: same-origin' \
+            -H 'Sec-Fetch-User: ?1' \
+            -H 'Upgrade-Insecure-Requests: 1' \
+            -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36' \
+            -H 'sec-ch-ua: "Google Chrome";v="155", "Chromium";v="155", "Not(A:Brand";v="24"' \
+            -H 'sec-ch-ua-mobile: ?0' \
+            -H 'sec-ch-ua-platform: "Linux"'
 
       - name: Extract GPX file
         run: |
