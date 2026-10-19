@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
 import { XMLParser } from 'fast-xml-parser';
 import type { GeoEvent } from '../src/lib/types.js';
 
-const GPX_PATH = 'data/$nebraska_events.gpx';
+const GPX_PATH = process.argv[2] ?? 'data/$nebraska_events.gpx';
 const OUTPUT_PATH = 'src/lib/data/events.json';
 
 // Nominatim usage policy: max 1 request/second and an identifying User-Agent.
@@ -47,8 +47,7 @@ function parseStartAndEndTime(shortDesc: string): { startTime: string, endTime: 
 
 function parseGpx(): GeoEvent[] {
 	if (!existsSync(GPX_PATH)) {
-		console.warn(`GPX file not found at ${GPX_PATH}, writing empty events.`);
-		return [];
+		throw new Error(`GPX file not found at ${GPX_PATH}`);
 	}
 
 	const xml = readFileSync(GPX_PATH, 'utf-8');
@@ -87,12 +86,6 @@ function parseGpx(): GeoEvent[] {
 
 				const { startTime, endTime } = parseStartAndEndTime(shortDesc);
 
-				const longDescRaw = (cache.long_description as string) ?? '';
-				const longDesc =
-					typeof longDescRaw === 'object'
-						? stripHtml(String((longDescRaw as Record<string, unknown>)['#text'] ?? ''))
-						: stripHtml(longDescRaw);
-
 				return {
 					gcCode: String(wpt.name ?? ''),
 					name: String(cache.name ?? wpt.urlname ?? ''),
@@ -103,8 +96,6 @@ function parseGpx(): GeoEvent[] {
 					lon: Number(wpt['@_lon']),
 					type: String(cache.type ?? 'Event'),
 					placedBy: String(cache.placed_by ?? ''),
-					shortDescription: shortDesc,
-					longDescription: longDesc,
 					url: String(wpt.url ?? ''),
 					state: String(cache.state ?? 'Nebraska')
 				};
@@ -114,7 +105,10 @@ function parseGpx(): GeoEvent[] {
 		})
 		.filter((e: GeoEvent | null): e is GeoEvent => e !== null)
 		.filter((e: GeoEvent) => new Date(e.date) >= now)
-		.sort((a: GeoEvent, b: GeoEvent) => new Date(a.date).getTime() - new Date(b.date).getTime());
+		.sort(
+			(a: GeoEvent, b: GeoEvent) =>
+				new Date(a.date).getTime() - new Date(b.date).getTime() || a.gcCode.localeCompare(b.gcCode)
+		);
 
 	return events;
 }
@@ -189,11 +183,33 @@ async function lookupLocation(lat: number, lon: number): Promise<Location | unde
 	return address.county ? { city: address.county, isNearest: false } : undefined;
 }
 
+// Cities from the previously committed events.json, so unchanged events don't
+// need another lookup (and a flaky lookup can't drop a city and cause a diff).
+function loadPreviousLocations(): Map<string, GeoEvent> {
+	if (!existsSync(OUTPUT_PATH)) return new Map();
+	try {
+		const previous = JSON.parse(readFileSync(OUTPUT_PATH, 'utf-8')) as GeoEvent[];
+		return new Map(previous.filter((e) => e.city).map((e) => [e.gcCode, e]));
+	} catch {
+		return new Map();
+	}
+}
+
 async function addCities(events: GeoEvent[]): Promise<void> {
+	const previous = loadPreviousLocations();
 	const lookups: { lat: number; lon: number; location: Location | undefined }[] = [];
+	let reused = 0;
 
 	for (const event of events) {
 		if (isNaN(event.lat) || isNaN(event.lon)) continue;
+
+		const prev = previous.get(event.gcCode);
+		if (prev && prev.lat === event.lat && prev.lon === event.lon) {
+			event.city = prev.city;
+			if (prev.cityIsNearest) event.cityIsNearest = true;
+			reused++;
+			continue;
+		}
 
 		let lookup = lookups.find(
 			(l) => distanceKm(l.lat, l.lon, event.lat, event.lon) <= LOCATION_REUSE_KM
@@ -215,7 +231,9 @@ async function addCities(events: GeoEvent[]): Promise<void> {
 		}
 	}
 
-	console.log(`Looked up ${lookups.length} locations for ${events.length} events`);
+	console.log(
+		`Looked up ${lookups.length} locations, reused ${reused} cities for ${events.length} events`
+	);
 }
 
 const outputDir = OUTPUT_PATH.substring(0, OUTPUT_PATH.lastIndexOf('/'));
@@ -225,5 +243,5 @@ if (!existsSync(outputDir)) {
 
 const events = parseGpx();
 await addCities(events);
-writeFileSync(OUTPUT_PATH, JSON.stringify(events, null, 2));
+writeFileSync(OUTPUT_PATH, JSON.stringify(events, null, 2) + '\n');
 console.log(`Parsed ${events.length} upcoming events → ${OUTPUT_PATH}`);
