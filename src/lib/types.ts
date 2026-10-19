@@ -12,4 +12,7 @@ export interface GeoEvent {
 	longDescription: string;
 	url: string;
 	state: string;
+	city?: string;
+	// True when the event isn't inside a town and `city` is the nearest one
+	cityIsNearest?: boolean;
 }

@@ -14,6 +14,20 @@
 	let startTime = $derived(new Date(event.startTime).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'UTC' }));
 	let endTime = $derived(new Date(event.endTime).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'UTC' }));
 
+	const STATE_ABBREVIATIONS: Record<string, string> = {
+		Nebraska: 'NE',
+		Colorado: 'CO',
+		Iowa: 'IA',
+		Kansas: 'KS',
+		Missouri: 'MO',
+		'South Dakota': 'SD',
+		Wyoming: 'WY'
+	};
+
+	function stateAbbr(state: string): string {
+		return STATE_ABBREVIATIONS[state] ?? state;
+	}
+
 	function formatCoord(lat: number, lon: number): string {
 		const latDir = lat >= 0 ? 'N' : 'S';
 		const lonDir = lon >= 0 ? 'E' : 'W';
@@ -63,7 +77,12 @@
 		<div class="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-trail-gray sm:text-sm">
 			<span class="flex items-center gap-1">
 				<MapPin size={14} class="text-prairie-green-50" />
-				{formatCoord(event.lat, event.lon)}
+				{#if event.city}
+					<span class="font-medium text-compass-gray">{event.cityIsNearest ? 'Near ' : ''}{event.city}, {stateAbbr(event.state)}</span>
+					<span class="text-trail-gray/70">· {formatCoord(event.lat, event.lon)}</span>
+				{:else}
+					{formatCoord(event.lat, event.lon)}
+				{/if}
 			</span>
 		</div>
 
