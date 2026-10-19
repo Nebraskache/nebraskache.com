@@ -8,6 +8,7 @@ export interface GeoEvent {
 	lon: number;
 	type: string;
 	placedBy: string;
+	placedByAccount: string;
 	url: string;
 	state: string;
 	city?: string;

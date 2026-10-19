@@ -96,6 +96,7 @@ function parseGpx(): GeoEvent[] {
 					lon: Number(wpt['@_lon']),
 					type: String(cache.type ?? 'Event'),
 					placedBy: String(cache.placed_by ?? ''),
+					placedByAccount: String((cache.owner as Record<string, unknown> | undefined)?.['#text'] ?? ''),
 					url: String(wpt.url ?? ''),
 					state: String(cache.state ?? 'Nebraska')
 				};

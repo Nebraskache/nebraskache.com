@@ -9,6 +9,7 @@
     "lon": -96.653183,
     "type": "Event Cache",
     "placedBy": "LadyGunslinger",
+    "placedByAccount": "LadyGunslinger",
     "url": "https://coord.info/GCBYJ0D",
     "state": "Nebraska",
     "city": "Lincoln"
@@ -23,6 +24,7 @@
     "lon": -96.31525,
     "type": "Event Cache",
     "placedBy": "Bronco",
+    "placedByAccount": "Bronco",
     "url": "https://coord.info/GCBWXJG",
     "state": "Nebraska",
     "city": "Ashland",
@@ -38,6 +40,7 @@
     "lon": -96.107427,
     "type": "Event Cache",
     "placedBy": "TeamDAAK",
+    "placedByAccount": "TeamDAAK",
     "url": "https://coord.info/GCBZCTR",
     "state": "Nebraska",
     "city": "La Vista"
@@ -52,6 +55,7 @@
     "lon": -96.653167,
     "type": "Event Cache",
     "placedBy": "starsharon and peteach!",
+    "placedByAccount": "starsharon + Hubbie",
     "url": "https://coord.info/GCBYRCQ",
     "state": "Nebraska",
     "city": "Lincoln"
@@ -66,6 +70,7 @@
     "lon": -96.080902,
     "type": "Event Cache",
     "placedBy": "TeamDAAK",
+    "placedByAccount": "TeamDAAK",
     "url": "https://coord.info/GCBZCVA",
     "state": "Nebraska",
     "city": "Omaha"
@@ -80,6 +85,7 @@
     "lon": -96.690383,
     "type": "Event Cache",
     "placedBy": "peteach! and starsharon",
+    "placedByAccount": "peteach!",
     "url": "https://coord.info/GCBYPYW",
     "state": "Nebraska",
     "city": "Lincoln"
@@ -94,6 +100,7 @@
     "lon": -98.340592,
     "type": "Event Cache",
     "placedBy": "UNDERTAKER54ANDWIFE",
+    "placedByAccount": "UNDERTAKER54ANDWIFE",
     "url": "https://coord.info/GCBZ7XM",
     "state": "Nebraska",
     "city": "Grand Island"
@@ -108,6 +115,7 @@
     "lon": -96.653167,
     "type": "Event Cache",
     "placedBy": "peteach! and starsharon",
+    "placedByAccount": "peteach!",
     "url": "https://coord.info/GCBYPZN",
     "state": "Nebraska",
     "city": "Lincoln"
@@ -122,6 +130,7 @@
     "lon": -97.474675,
     "type": "Mega-Event Cache",
     "placedBy": "MOGA2027",
+    "placedByAccount": "MOGA2027",
     "url": "https://coord.info/GCBM67E",
     "state": "Nebraska",
     "city": "Norfolk",
