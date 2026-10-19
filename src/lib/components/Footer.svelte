@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Mail, Facebook, Compass } from "lucide-svelte";
+  import { Mail, Facebook, Compass, MountainSnow } from "lucide-svelte";
 </script>
 
 <footer class="mt-auto bg-prairie-green text-white">
@@ -11,7 +11,8 @@
           <img
             src="/nebraskache-sans.svg"
             alt="Nebraskache logo"
-            class="h-10 w-auto" />
+            class="h-10 w-auto"
+          />
           <span class="font-heading text-lg font-bold">Nebraskache</span>
         </div>
         <p class="text-sm leading-relaxed text-white/80">
@@ -24,49 +25,56 @@
       <div>
         <h3
           class="mb-4 font-heading text-sm font-semibold uppercase
-          tracking-wider text-prairie-gold">
+          tracking-wider text-prairie-gold"
+        >
           Quick Links
         </h3>
         <ul class="space-y-2 text-sm">
           <li>
             <a
               href="/events"
-              class="text-white/80 transition-colors hover:text-white">
+              class="text-white/80 transition-colors hover:text-white"
+            >
               Upcoming Events
             </a>
           </li>
           <li>
             <a
               href="/about"
-              class="text-white/80 transition-colors hover:text-white">
+              class="text-white/80 transition-colors hover:text-white"
+            >
               About Us
             </a>
           </li>
           <li>
             <a
               href="/membership"
-              class="text-white/80 transition-colors hover:text-white">
+              class="text-white/80 transition-colors hover:text-white"
+            >
               Membership
             </a>
           </li>
           <li>
             <a
               href="/feedback"
-              class="text-white/80 transition-colors hover:text-white">
+              class="text-white/80 transition-colors hover:text-white"
+            >
               Feedback
             </a>
           </li>
           <li>
             <a
               href="/minutes"
-              class="text-white/80 transition-colors hover:text-white">
+              class="text-white/80 transition-colors hover:text-white"
+            >
               Meeting Minutes
             </a>
           </li>
           <li>
             <a
               href="/bylaws"
-              class="text-white/80 transition-colors hover:text-white">
+              class="text-white/80 transition-colors hover:text-white"
+            >
               Bylaws
             </a>
           </li>
@@ -77,7 +85,8 @@
       <div>
         <h3
           class="mb-4 font-heading text-sm font-semibold uppercase
-          tracking-wider text-prairie-gold">
+          tracking-wider text-prairie-gold"
+        >
           Connect
         </h3>
         <ul class="space-y-3 text-sm">
@@ -85,7 +94,8 @@
             <a
               href="mailto:nebraskache@gmail.com"
               class="flex items-center gap-2 text-white/80 transition-colors
-              hover:text-white">
+              hover:text-white"
+            >
               <Mail size={16} />
               nebraskache@gmail.com
             </a>
@@ -96,7 +106,8 @@
               target="_blank"
               rel="noopener noreferrer"
               class="flex items-center gap-2 text-white/80 transition-colors
-              hover:text-white">
+              hover:text-white"
+            >
               <Facebook size={16} />
               Facebook Group
             </a>
@@ -107,7 +118,8 @@
               target="_blank"
               rel="noopener noreferrer"
               class="flex items-center gap-2 text-white/80 transition-colors
-              hover:text-white">
+              hover:text-white"
+            >
               <Compass size={16} />
               Geocaching.com
             </a>
@@ -118,8 +130,11 @@
 
     <div
       class="mt-10 border-t border-white/20 pt-6 text-center text-xs
-      text-white/60">
-      &copy; {new Date().getFullYear()} Nebraskache. All rights reserved.
+      text-white/60"
+    >
+      &copy; {new Date().getFullYear()} Nebraskache • Made with
+      <MountainSnow size="1em" class="inline-block align-[-0.125em]" />
+      in Norfolk, Nebraska
     </div>
   </div>
 </footer>
