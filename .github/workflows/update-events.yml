@@ -1,4 +1,4 @@
-name: Update Nebraska Events GPX
+name: Update Nebraska Events
 
 on:
   schedule:
@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  update-gpx:
+  update-events:
     runs-on: ubuntu-slim
     permissions:
       contents: write
@@ -130,7 +130,7 @@ jobs:
         run: |
           unzip events.zip
           rm -f *-wpts.gpx
-          mv *nebraska_events.gpx 'data/$nebraska_events.gpx'
+          mv *nebraska_events.gpx '$nebraska_events.gpx'
 
       - name: Setup Node
         uses: actions/setup-node@v7
@@ -142,7 +142,7 @@ jobs:
         run: npm ci --omit=dev
 
       - name: Parse GPX into events.json
-        run: npm run parse-gpx
+        run: npm run parse-gpx -- '$nebraska_events.gpx'
 
       - name: Commit, push, and deploy changes
         env:

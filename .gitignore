@@ -4,7 +4,7 @@
 # Generated data (rebuilt at build time)
 src/lib/data/meeting-minutes.json
 
-# Raw GPX download (parsed into src/lib/data/events.json by the update-gpx workflow)
+# Raw GPX download (parsed into src/lib/data/events.json by the update-events workflow)
 data/*.gpx
 
 # Dependencies
