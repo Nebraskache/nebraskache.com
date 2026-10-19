@@ -39,6 +39,8 @@
 		const lonMin = ((absLon - lonDeg) * 60).toFixed(3);
 		return `${latDir} ${latDeg}\u00B0 ${latMin}\u2032 ${lonDir} ${lonDeg}\u00B0 ${lonMin}\u2032`;
 	}
+
+	let mapsUrl = $derived(`https://www.google.com/maps/search/?api=1&query=${event.lat},${event.lon}`);
 </script>
 
 <article class="group flex overflow-hidden rounded-xl border border-prairie-green-25 bg-white shadow-sm transition-shadow hover:shadow-md">
@@ -75,15 +77,20 @@
 		</div>
 
 		<div class="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-trail-gray sm:text-sm">
-			<span class="flex items-center gap-1">
+			<a
+				href={mapsUrl}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="group/location flex items-center gap-1 transition-colors hover:text-prairie-green"
+			>
 				<MapPin size={14} class="text-prairie-green-50" />
 				{#if event.city}
-					<span class="font-medium text-compass-gray">{event.cityIsNearest ? 'Near ' : ''}{event.city}, {stateAbbr(event.state)}</span>
-					<span class="text-trail-gray/70">· {formatCoord(event.lat, event.lon)}</span>
+					<span class="font-medium text-compass-gray transition-colors group-hover/location:text-prairie-green">{event.cityIsNearest ? 'Near ' : ''}{event.city}, {stateAbbr(event.state)}</span>
+					<span class="text-trail-gray/70 transition-colors group-hover/location:text-prairie-green">· {formatCoord(event.lat, event.lon)}</span>
 				{:else}
 					{formatCoord(event.lat, event.lon)}
 				{/if}
-			</span>
+			</a>
 		</div>
 
 		<div class="mt-3">
