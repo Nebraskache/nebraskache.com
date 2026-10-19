@@ -1,9 +1,15 @@
 <script lang="ts">
   import { MapPin, Calendar, ExternalLink, Users } from "lucide-svelte";
   import type { GeoEvent } from "$lib/types";
-  import { getGeoProfileURL } from "$lib/util";
+  import { getGeoProfileURL, isHappeningToday } from "$lib/util";
 
   let { event }: { event: GeoEvent } = $props();
+
+  // Only known in the browser; the prerender runs in the build server's time zone.
+  let isToday = $state(false);
+  $effect(() => {
+    isToday = isHappeningToday(event.startTime, event.endTime);
+  });
 
   let date = $derived(new Date(event.date));
   let month = $derived(
@@ -72,8 +78,14 @@
 </script>
 
 <article
-  class="group flex overflow-hidden rounded-xl border border-prairie-green-25 bg-white shadow-sm transition-shadow hover:shadow-md"
+  class={[
+    "group flex overflow-hidden rounded-xl border shadow-sm transition-shadow hover:shadow-md",
+    isToday
+      ? "border-prairie-gold bg-prairie-gold-25/40 ring-1 ring-prairie-gold-50"
+      : "border-prairie-green-25 bg-white",
+  ]}
 >
+  {#if isToday}<span class="sr-only">Happening today:</span>{/if}
   <!-- Date badge -->
   <div
     class="flex w-20 shrink-0 flex-col items-center justify-center bg-prairie-green p-3 text-white sm:w-24"
@@ -90,6 +102,15 @@
 
   <!-- Content -->
   <div class="flex min-w-0 flex-1 flex-col p-4 sm:p-5">
+    {#if isHappeningToday(event.startTime, event.endTime)}
+      <div class="mb-1">
+        <span
+          class="inline-block rounded-full bg-prairie-gold-25 px-2.5 py-0.5 text-xs font-medium text-prairie-green"
+        >
+          Today!
+        </span>
+      </div>
+    {/if}
     {#if event.type !== "Event Cache"}
       <div class="mb-1">
         <span
