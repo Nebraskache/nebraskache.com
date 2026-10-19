@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Users, Target, Heart, MapPin } from "lucide-svelte";
+  import { getGeoProfileURL } from "$lib/util";
 
   const committee = [
     {
@@ -168,9 +169,13 @@
 
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {#each committee as member}
-        <div
+        <a
+          href={getGeoProfileURL(member.name)}
+          target="_blank"
+          rel="noopener noreferrer"
           class="flex items-center gap-4 rounded-xl border
-          border-prairie-green-25 bg-white p-5 shadow-sm">
+          border-prairie-green-25 bg-white p-5 shadow-sm transition
+          hover:border-prairie-gold hover:bg-prairie-gold-25 hover:shadow-md">
           {#if imageFailures[member.name]}
             <div
               class="flex h-14 w-14 shrink-0 items-center justify-center
@@ -193,7 +198,7 @@
             <p class="text-sm text-trail-gray">{member.realName}</p>
             <p class="text-sm text-trail-gray">{member.role}</p>
           </div>
-        </div>
+        </a>
       {/each}
     </div>
 
