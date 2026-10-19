@@ -133,7 +133,7 @@
       text-white/60"
     >
       &copy; {new Date().getFullYear()} Nebraskache • Made with
-      <MountainSnow size="1em" class="inline-block align-[-0.125em]" />
+      <MountainSnow size="1em" class="inline-block align-[-0.125em] text-prairie-gold" />
       in Norfolk, Nebraska
     </div>
   </div>
