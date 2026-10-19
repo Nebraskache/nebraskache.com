@@ -10,6 +10,6 @@ function isTodayOrFuture(isoDate: string): boolean {
 }
 
 export function load() {
-	const events = eventsData.filter((event) => isTodayOrFuture(event.date)) as GeoEvent[];
-	return { events };
+	const events = eventsData.events.filter((event) => isTodayOrFuture(event.date)) as GeoEvent[];
+	return { events, updatedAt: eventsData.updatedAt };
 }

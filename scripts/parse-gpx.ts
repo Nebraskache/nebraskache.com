@@ -45,7 +45,12 @@ function parseStartAndEndTime(shortDesc: string): { startTime: string, endTime: 
 	return { startTime: startTime.toISOString(), endTime: endTime.toISOString() };
 }
 
-function parseGpx(): GeoEvent[] {
+interface EventsFile {
+	updatedAt: string;
+	events: GeoEvent[];
+}
+
+function parseGpx(): EventsFile {
 	if (!existsSync(GPX_PATH)) {
 		throw new Error(`GPX file not found at ${GPX_PATH}`);
 	}
@@ -61,9 +66,13 @@ function parseGpx(): GeoEvent[] {
 	const parsed = parser.parse(xml);
 	const waypoints = parsed?.gpx?.wpt;
 
+	// Top-level <time> is when the pocket query was generated.
+	const generatedAt = new Date(String(parsed?.gpx?.time ?? ''));
+	const updatedAt = isNaN(generatedAt.getTime()) ? '' : generatedAt.toISOString();
+
 	if (!waypoints) {
 		console.warn('No waypoints found in GPX file.');
-		return [];
+		return { updatedAt, events: [] };
 	}
 
 	const wptArray = Array.isArray(waypoints) ? waypoints : [waypoints];
@@ -111,7 +120,7 @@ function parseGpx(): GeoEvent[] {
 				new Date(a.date).getTime() - new Date(b.date).getTime() || a.gcCode.localeCompare(b.gcCode)
 		);
 
-	return events;
+	return { updatedAt, events };
 }
 
 function sleep(ms: number): Promise<void> {
@@ -184,20 +193,19 @@ async function lookupLocation(lat: number, lon: number): Promise<Location | unde
 	return address.county ? { city: address.county, isNearest: false } : undefined;
 }
 
-// Cities from the previously committed events.json, so unchanged events don't
-// need another lookup (and a flaky lookup can't drop a city and cause a diff).
-function loadPreviousLocations(): Map<string, GeoEvent> {
-	if (!existsSync(OUTPUT_PATH)) return new Map();
+function loadPrevious(): EventsFile | undefined {
+	if (!existsSync(OUTPUT_PATH)) return undefined;
 	try {
-		const previous = JSON.parse(readFileSync(OUTPUT_PATH, 'utf-8')) as GeoEvent[];
-		return new Map(previous.filter((e) => e.city).map((e) => [e.gcCode, e]));
+		return JSON.parse(readFileSync(OUTPUT_PATH, 'utf-8')) as EventsFile;
 	} catch {
-		return new Map();
+		return undefined;
 	}
 }
 
-async function addCities(events: GeoEvent[]): Promise<void> {
-	const previous = loadPreviousLocations();
+// Cities from the previously committed events.json, so unchanged events don't
+// need another lookup (and a flaky lookup can't drop a city and cause a diff).
+async function addCities(events: GeoEvent[], previousEvents: GeoEvent[]): Promise<void> {
+	const previous = new Map(previousEvents.filter((e) => e.city).map((e) => [e.gcCode, e]));
 	const lookups: { lat: number; lon: number; location: Location | undefined }[] = [];
 	let reused = 0;
 
@@ -242,7 +250,18 @@ if (!existsSync(outputDir)) {
 	mkdirSync(outputDir, { recursive: true });
 }
 
-const events = parseGpx();
-await addCities(events);
-writeFileSync(OUTPUT_PATH, JSON.stringify(events, null, 2) + '\n');
+const previous = loadPrevious();
+const parsed = parseGpx();
+const events = parsed.events;
+await addCities(events, previous?.events ?? []);
+
+// Only bump updatedAt when the listing actually changes, so an unchanged
+// pocket query doesn't produce a commit and deploy.
+const unchanged =
+	previous?.updatedAt && JSON.stringify(previous.events) === JSON.stringify(events);
+const updatedAt = unchanged ? previous.updatedAt : parsed.updatedAt;
+if (unchanged) console.log(`Events unchanged, keeping updatedAt ${updatedAt}`);
+
+const output: EventsFile = { updatedAt, events };
+writeFileSync(OUTPUT_PATH, JSON.stringify(output, null, 2) + '\n');
 console.log(`Parsed ${events.length} upcoming events → ${OUTPUT_PATH}`);
