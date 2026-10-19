@@ -1,15 +1,8 @@
 import type { GeoEvent } from '$lib/types';
 import eventsData from '$lib/data/events.json';
-
-function isTodayOrFuture(isoDate: string): boolean {
-	const today = new Date();
-	today.setHours(0, 0, 0, 0);
-	const eventDate = new Date(isoDate);
-	eventDate.setHours(0, 0, 0, 0);
-	return eventDate.getTime() >= today.getTime();
-}
+import { isTodayOrFuture } from '$lib/util';
 
 export function load() {
-	const events = eventsData.events.filter((event) => isTodayOrFuture(event.date)) as GeoEvent[];
+	const events = eventsData.events.filter((event) => isTodayOrFuture(event.endTime)) as GeoEvent[];
 	return { events, updatedAt: eventsData.updatedAt };
 }

@@ -37,10 +37,30 @@ function stripHtml(html: string): string {
 		.trim();
 }
 
-function parseStartAndEndTime(shortDesc: string): { startTime: string, endTime: string } {
-	const [start, end] = shortDesc.split('-');
-	const startTime = new Date(start + ' UTC');
-	const endTime = new Date(start.replace(/\d\d:\d\d/, end) + ' UTC');
+const MONTHS = [
+	'january', 'february', 'march', 'april', 'may', 'june',
+	'july', 'august', 'september', 'october', 'november', 'december'
+];
+
+// The short description holds the event's local time, e.g. "31 October 2026, 11:15 - 12:15".
+// The GPX has no time zone, so times are kept as wall-clock values stored as UTC and
+// must be displayed with timeZone: 'UTC'.
+function parseStartAndEndTime(
+	shortDesc: string,
+	fallback: Date
+): { startTime: string; endTime: string } {
+	const match = shortDesc.match(/(\d{1,2}) (\w+) (\d{4}), (\d{1,2}):(\d{2}) - (\d{1,2}):(\d{2})/);
+	const month = match ? MONTHS.indexOf(match[2].toLowerCase()) : -1;
+	if (!match || month === -1) {
+		console.warn(`Unrecognized event time "${shortDesc}", using GPX time`);
+		return { startTime: fallback.toISOString(), endTime: fallback.toISOString() };
+	}
+
+	const [, day, , year, startHour, startMinute, endHour, endMinute] = match.map(Number);
+	const startTime = new Date(Date.UTC(year, month, day, startHour, startMinute));
+	const endTime = new Date(Date.UTC(year, month, day, endHour, endMinute));
+	// An end earlier than the start runs past midnight
+	if (endTime < startTime) endTime.setUTCDate(endTime.getUTCDate() + 1);
 
 	return { startTime: startTime.toISOString(), endTime: endTime.toISOString() };
 }
@@ -93,14 +113,14 @@ function parseGpx(): EventsFile {
 						? stripHtml(String((shortDescRaw as Record<string, unknown>)['#text'] ?? ''))
 						: stripHtml(shortDescRaw);
 
-				const { startTime, endTime } = parseStartAndEndTime(shortDesc);
+				const { startTime, endTime } = parseStartAndEndTime(shortDesc, eventDate);
 
 				return {
 					gcCode: String(wpt.name ?? ''),
 					name: String(cache.name ?? wpt.urlname ?? ''),
 					date: eventDate.toISOString(),
-					startTime: String(startTime ?? ''),
-					endTime: String(endTime ?? ''),
+					startTime,
+					endTime,
 					lat: Number(wpt['@_lat']),
 					lon: Number(wpt['@_lon']),
 					type: String(cache.type ?? 'Event'),
@@ -114,7 +134,6 @@ function parseGpx(): EventsFile {
 			}
 		})
 		.filter((e: GeoEvent | null): e is GeoEvent => e !== null)
-		.filter((e: GeoEvent) => new Date(e.date) >= now)
 		.sort(
 			(a: GeoEvent, b: GeoEvent) =>
 				new Date(a.date).getTime() - new Date(b.date).getTime() || a.gcCode.localeCompare(b.gcCode)

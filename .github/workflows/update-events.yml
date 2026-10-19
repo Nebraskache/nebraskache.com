@@ -3,6 +3,11 @@ name: Update Nebraska Events
 on:
   schedule:
     - cron: "0 11 * * *" # 6am US Central (UTC-5/UTC-6 depending on DST; UTC 11:00 is 6am CDT, 5am CST)
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/update-events.yml"
+      - "scripts/parse-gpx.ts"
   workflow_dispatch:
 
 jobs:
