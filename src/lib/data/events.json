@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-18T07:27:49.218Z",
+  "updatedAt": "2026-10-21T07:26:00.487Z",
   "events": [
     {
       "gcCode": "GCBY091",
@@ -212,6 +212,21 @@
       "url": "https://coord.info/GCBYPZN",
       "state": "Nebraska",
       "city": "Lincoln"
+    },
+    {
+      "gcCode": "GCBZ0YT",
+      "name": "GPS Adventure Maze – MOGA 2027",
+      "date": "2027-04-17T00:00:00.000Z",
+      "startTime": "2027-04-17T00:00:00.000Z",
+      "endTime": "2027-04-17T00:00:00.000Z",
+      "lat": 42.037881,
+      "lon": -97.417923,
+      "type": "GPS Adventures Exhibit",
+      "placedBy": "Semmels123",
+      "placedByAccount": "Semmels123",
+      "url": "https://coord.info/GCBZ0YT",
+      "state": "Nebraska",
+      "city": "Norfolk"
     },
     {
       "gcCode": "GCBM67E",
