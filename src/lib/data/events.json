@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-21T07:26:00.487Z",
+  "updatedAt": "2026-10-28T07:24:50.025Z",
   "events": [
     {
       "gcCode": "GCBY091",
@@ -78,36 +78,6 @@
       "city": "Omaha"
     },
     {
-      "gcCode": "GCBYJTK",
-      "name": "Geo Breakfast October",
-      "date": "2026-10-17T08:00:00.000Z",
-      "startTime": "2026-10-17T08:00:00.000Z",
-      "endTime": "2026-10-17T09:00:00.000Z",
-      "lat": 41.265233,
-      "lon": -96.039317,
-      "type": "Event Cache",
-      "placedBy": "luvkenya",
-      "placedByAccount": "luvkenya",
-      "url": "https://coord.info/GCBYJTK",
-      "state": "Nebraska",
-      "city": "Omaha"
-    },
-    {
-      "gcCode": "GCBYJ0D",
-      "name": "Let's EAT!-CLII (152) Officially hoodie season!",
-      "date": "2026-10-21T17:45:00.000Z",
-      "startTime": "2026-10-21T17:45:00.000Z",
-      "endTime": "2026-10-21T19:45:00.000Z",
-      "lat": 40.7862,
-      "lon": -96.653183,
-      "type": "Event Cache",
-      "placedBy": "LadyGunslinger",
-      "placedByAccount": "LadyGunslinger",
-      "url": "https://coord.info/GCBYJ0D",
-      "state": "Nebraska",
-      "city": "Lincoln"
-    },
-    {
       "gcCode": "GCBWXJG",
       "name": "Frankenstein Friday 2026",
       "date": "2026-10-30T18:00:00.000Z",
@@ -184,6 +154,21 @@
       "city": "Lincoln"
     },
     {
+      "gcCode": "GCBZRYB",
+      "name": "November GEo-Breakfast",
+      "date": "2026-11-14T08:00:00.000Z",
+      "startTime": "2026-11-14T08:00:00.000Z",
+      "endTime": "2026-11-14T09:00:00.000Z",
+      "lat": 41.265233,
+      "lon": -96.039317,
+      "type": "Event Cache",
+      "placedBy": "bhjalarson",
+      "placedByAccount": "bhjalarson",
+      "url": "https://coord.info/GCBZRYB",
+      "state": "Nebraska",
+      "city": "Omaha"
+    },
+    {
       "gcCode": "GCBZ7XM",
       "name": "breakfast in the tri cities",
       "date": "2026-11-14T09:00:00.000Z",
@@ -199,6 +184,21 @@
       "city": "Grand Island"
     },
     {
+      "gcCode": "GCBZR6J",
+      "name": "Let's EAT! CLIII (153) - Thank a Vet this month!",
+      "date": "2026-11-18T17:45:00.000Z",
+      "startTime": "2026-11-18T17:45:00.000Z",
+      "endTime": "2026-11-18T19:45:00.000Z",
+      "lat": 40.7862,
+      "lon": -96.653183,
+      "type": "Event Cache",
+      "placedBy": "LadyGunslinger",
+      "placedByAccount": "LadyGunslinger",
+      "url": "https://coord.info/GCBZR6J",
+      "state": "Nebraska",
+      "city": "Lincoln"
+    },
+    {
       "gcCode": "GCBYPZN",
       "name": "Lunch For A Little Cache Redux #65",
       "date": "2026-12-03T11:45:00.000Z",
@@ -212,6 +212,22 @@
       "url": "https://coord.info/GCBYPZN",
       "state": "Nebraska",
       "city": "Lincoln"
+    },
+    {
+      "gcCode": "GCBZGVM",
+      "name": "Heeeere's MOGA",
+      "date": "2027-04-16T18:00:00.000Z",
+      "startTime": "2027-04-16T18:00:00.000Z",
+      "endTime": "2027-04-16T20:00:00.000Z",
+      "lat": 42.033,
+      "lon": -97.475,
+      "type": "Event Cache",
+      "placedBy": "MOGA2027",
+      "placedByAccount": "MOGA2027",
+      "url": "https://coord.info/GCBZGVM",
+      "state": "Nebraska",
+      "city": "Norfolk",
+      "cityIsNearest": true
     },
     {
       "gcCode": "GCBZ0YT",
@@ -243,6 +259,52 @@
       "state": "Nebraska",
       "city": "Norfolk",
       "cityIsNearest": true
+    },
+    {
+      "gcCode": "GCBZGVT",
+      "name": "And the MOGA Award Goes To....",
+      "date": "2027-04-17T19:00:00.000Z",
+      "startTime": "2027-04-17T19:00:00.000Z",
+      "endTime": "2027-04-17T20:30:00.000Z",
+      "lat": 42.033046,
+      "lon": -97.474894,
+      "type": "Event Cache",
+      "placedBy": "MOGA2027",
+      "placedByAccount": "MOGA2027",
+      "url": "https://coord.info/GCBZGVT",
+      "state": "Nebraska",
+      "city": "Norfolk",
+      "cityIsNearest": true
+    },
+    {
+      "gcCode": "GCBZGW0",
+      "name": "The MOGA 2027 Farewell Breakfast!",
+      "date": "2027-04-18T08:00:00.000Z",
+      "startTime": "2027-04-18T08:00:00.000Z",
+      "endTime": "2027-04-18T10:00:00.000Z",
+      "lat": 42.003915,
+      "lon": -97.419891,
+      "type": "Event Cache",
+      "placedBy": "MOGA2027",
+      "placedByAccount": "MOGA2027",
+      "url": "https://coord.info/GCBZGW0",
+      "state": "Nebraska",
+      "city": "Norfolk"
+    },
+    {
+      "gcCode": "GCBZGW5",
+      "name": "HEEEEERE'S A CLEANER NORFOLK!",
+      "date": "2027-04-18T10:30:00.000Z",
+      "startTime": "2027-04-18T10:30:00.000Z",
+      "endTime": "2027-04-18T12:00:00.000Z",
+      "lat": 42.004359,
+      "lon": -97.421181,
+      "type": "Cache In Trash Out Event",
+      "placedBy": "MOGA2027",
+      "placedByAccount": "MOGA2027",
+      "url": "https://coord.info/GCBZGW5",
+      "state": "Nebraska",
+      "city": "Norfolk"
     }
   ]
 }
