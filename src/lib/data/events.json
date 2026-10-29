@@ -1,21 +1,6 @@
 {
-  "updatedAt": "2026-10-28T07:24:50.025Z",
+  "updatedAt": "2026-10-29T07:27:04.293Z",
   "events": [
-    {
-      "gcCode": "GCBY091",
-      "name": "Coffee with GeobabeKiki",
-      "date": "2026-09-28T08:00:00.000Z",
-      "startTime": "2026-09-28T08:00:00.000Z",
-      "endTime": "2026-09-28T08:30:00.000Z",
-      "lat": 41.213567,
-      "lon": -98.458433,
-      "type": "Event Cache",
-      "placedBy": "Geobabekiki",
-      "placedByAccount": "Geobabekiki",
-      "url": "https://coord.info/GCBY091",
-      "state": "Nebraska",
-      "city": "Saint Paul"
-    },
     {
       "gcCode": "GCBXF8J",
       "name": "Lunch For A Little Cache Redux #63",
