@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-29T07:27:04.293Z",
+  "updatedAt": "2026-10-31T07:23:42.757Z",
   "events": [
     {
       "gcCode": "GCBXF8J",
@@ -197,6 +197,36 @@
       "url": "https://coord.info/GCBYPZN",
       "state": "Nebraska",
       "city": "Lincoln"
+    },
+    {
+      "gcCode": "GCBZYGJ",
+      "name": "A Post-Caching Dinner",
+      "date": "2026-12-04T19:00:00.000Z",
+      "startTime": "2026-12-04T19:00:00.000Z",
+      "endTime": "2026-12-04T20:00:00.000Z",
+      "lat": 40.812997,
+      "lon": -96.736841,
+      "type": "Event Cache",
+      "placedBy": "57Orion",
+      "placedByAccount": "57Orion",
+      "url": "https://coord.info/GCBZYGJ",
+      "state": "Nebraska",
+      "city": "Lincoln"
+    },
+    {
+      "gcCode": "GCBZYGX",
+      "name": "Quick Cup O' Joe - Omaha Edition",
+      "date": "2026-12-05T08:30:00.000Z",
+      "startTime": "2026-12-05T08:30:00.000Z",
+      "endTime": "2026-12-05T09:00:00.000Z",
+      "lat": 41.241403,
+      "lon": -96.014952,
+      "type": "Event Cache",
+      "placedBy": "57Orion",
+      "placedByAccount": "57Orion",
+      "url": "https://coord.info/GCBZYGX",
+      "state": "Nebraska",
+      "city": "Omaha"
     },
     {
       "gcCode": "GCBZGVM",
