@@ -1,21 +1,6 @@
 {
-  "updatedAt": "2026-10-31T07:23:42.757Z",
+  "updatedAt": "2026-11-01T07:27:20.719Z",
   "events": [
-    {
-      "gcCode": "GCBXF8J",
-      "name": "Lunch For A Little Cache Redux #63",
-      "date": "2026-10-01T11:45:00.000Z",
-      "startTime": "2026-10-01T11:45:00.000Z",
-      "endTime": "2026-10-01T13:00:00.000Z",
-      "lat": 40.756917,
-      "lon": -96.653167,
-      "type": "Event Cache",
-      "placedBy": "peteach! and starsharon",
-      "placedByAccount": "peteach!",
-      "url": "https://coord.info/GCBXF8J",
-      "state": "Nebraska",
-      "city": "Lincoln"
-    },
     {
       "gcCode": "GCBVK0H",
       "name": "London Calling on Tour - 100° West of Greenwich",
