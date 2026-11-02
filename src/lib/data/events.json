@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-01T07:27:20.719Z",
+  "updatedAt": "2026-11-02T08:25:34.112Z",
   "events": [
     {
       "gcCode": "GCBVK0H",
@@ -62,21 +62,6 @@
       "state": "Nebraska",
       "city": "Ashland",
       "cityIsNearest": true
-    },
-    {
-      "gcCode": "GCBZCTR",
-      "name": "Omaha Lunch #87",
-      "date": "2026-10-31T11:15:00.000Z",
-      "startTime": "2026-10-31T11:15:00.000Z",
-      "endTime": "2026-10-31T12:15:00.000Z",
-      "lat": 41.180272,
-      "lon": -96.107427,
-      "type": "Event Cache",
-      "placedBy": "TeamDAAK",
-      "placedByAccount": "TeamDAAK",
-      "url": "https://coord.info/GCBZCTR",
-      "state": "Nebraska",
-      "city": "La Vista"
     },
     {
       "gcCode": "GCBYRCQ",
