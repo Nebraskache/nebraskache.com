@@ -1,22 +1,6 @@
 {
-  "updatedAt": "2026-11-02T08:25:34.112Z",
+  "updatedAt": "2026-11-05T08:27:16.426Z",
   "events": [
-    {
-      "gcCode": "GCBVK0H",
-      "name": "London Calling on Tour - 100° West of Greenwich",
-      "date": "2026-10-05T10:00:00.000Z",
-      "startTime": "2026-10-05T10:00:00.000Z",
-      "endTime": "2026-10-05T10:30:00.000Z",
-      "lat": 42.5595,
-      "lon": -100,
-      "type": "Event Cache",
-      "placedBy": "goldpot",
-      "placedByAccount": "goldpot",
-      "url": "https://coord.info/GCBVK0H",
-      "state": "Nebraska",
-      "city": "Johnstown",
-      "cityIsNearest": true
-    },
     {
       "gcCode": "GCBXF44",
       "name": "Diners and Dives # 94",
@@ -46,22 +30,6 @@
       "url": "https://coord.info/GCBYK7H",
       "state": "Nebraska",
       "city": "Omaha"
-    },
-    {
-      "gcCode": "GCBWXJG",
-      "name": "Frankenstein Friday 2026",
-      "date": "2026-10-30T18:00:00.000Z",
-      "startTime": "2026-10-30T18:00:00.000Z",
-      "endTime": "2026-10-30T18:45:00.000Z",
-      "lat": 41.034,
-      "lon": -96.31525,
-      "type": "Event Cache",
-      "placedBy": "Bronco",
-      "placedByAccount": "Bronco",
-      "url": "https://coord.info/GCBWXJG",
-      "state": "Nebraska",
-      "city": "Ashland",
-      "cityIsNearest": true
     },
     {
       "gcCode": "GCBYRCQ",
