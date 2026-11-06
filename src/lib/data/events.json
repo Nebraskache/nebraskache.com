@@ -1,21 +1,6 @@
 {
-  "updatedAt": "2026-11-05T08:27:16.426Z",
+  "updatedAt": "2026-11-06T08:30:22.936Z",
   "events": [
-    {
-      "gcCode": "GCBXF44",
-      "name": "Diners and Dives # 94",
-      "date": "2026-10-06T17:45:00.000Z",
-      "startTime": "2026-10-06T17:45:00.000Z",
-      "endTime": "2026-10-06T19:45:00.000Z",
-      "lat": 40.757967,
-      "lon": -96.6426,
-      "type": "Event Cache",
-      "placedBy": "starsharon and peteach!",
-      "placedByAccount": "starsharon + Hubbie",
-      "url": "https://coord.info/GCBXF44",
-      "state": "Nebraska",
-      "city": "Lincoln"
-    },
     {
       "gcCode": "GCBYK7H",
       "name": "Eisenhower Day Lunch Event",
