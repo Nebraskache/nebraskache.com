@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-06T08:30:22.936Z",
+  "updatedAt": "2026-11-12T08:26:29.631Z",
   "events": [
     {
       "gcCode": "GCBYK7H",
@@ -70,7 +70,7 @@
       "lat": 41.265233,
       "lon": -96.039317,
       "type": "Event Cache",
-      "placedBy": "bhjalarson",
+      "placedBy": "bhjalarson Monty12",
       "placedByAccount": "bhjalarson",
       "url": "https://coord.info/GCBZRYB",
       "state": "Nebraska",
@@ -103,6 +103,21 @@
       "placedBy": "LadyGunslinger",
       "placedByAccount": "LadyGunslinger",
       "url": "https://coord.info/GCBZR6J",
+      "state": "Nebraska",
+      "city": "Lincoln"
+    },
+    {
+      "gcCode": "GCC0D6H",
+      "name": "Diners and Dives #96",
+      "date": "2026-12-01T17:45:00.000Z",
+      "startTime": "2026-12-01T17:45:00.000Z",
+      "endTime": "2026-12-01T19:45:00.000Z",
+      "lat": 40.7343,
+      "lon": -96.7028,
+      "type": "Event Cache",
+      "placedBy": "starsharon and peteach!",
+      "placedByAccount": "starsharon + Hubbie",
+      "url": "https://coord.info/GCC0D6H",
       "state": "Nebraska",
       "city": "Lincoln"
     },
