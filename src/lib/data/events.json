@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-12T08:26:29.631Z",
+  "updatedAt": "2026-11-13T08:31:32.179Z",
   "events": [
     {
       "gcCode": "GCBYK7H",
@@ -163,6 +163,21 @@
       "placedBy": "57Orion",
       "placedByAccount": "57Orion",
       "url": "https://coord.info/GCBZYGX",
+      "state": "Nebraska",
+      "city": "Omaha"
+    },
+    {
+      "gcCode": "GCC0DB7",
+      "name": "December Geo Breakfast - Ugly Sweater 2026",
+      "date": "2026-12-12T08:00:00.000Z",
+      "startTime": "2026-12-12T08:00:00.000Z",
+      "endTime": "2026-12-12T09:00:00.000Z",
+      "lat": 41.265233,
+      "lon": -96.039317,
+      "type": "Event Cache",
+      "placedBy": "LadyCache",
+      "placedByAccount": "LadyCache",
+      "url": "https://coord.info/GCC0DB7",
       "state": "Nebraska",
       "city": "Omaha"
     },
