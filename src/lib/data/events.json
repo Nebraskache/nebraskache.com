@@ -1,21 +1,6 @@
 {
-  "updatedAt": "2026-11-13T08:31:32.179Z",
+  "updatedAt": "2026-11-14T08:24:19.135Z",
   "events": [
-    {
-      "gcCode": "GCBYK7H",
-      "name": "Eisenhower Day Lunch Event",
-      "date": "2026-10-14T11:30:00.000Z",
-      "startTime": "2026-10-14T11:30:00.000Z",
-      "endTime": "2026-10-14T12:30:00.000Z",
-      "lat": 41.236233,
-      "lon": -96.11885,
-      "type": "Event Cache",
-      "placedBy": "kilroy18",
-      "placedByAccount": "kilroy18",
-      "url": "https://coord.info/GCBYK7H",
-      "state": "Nebraska",
-      "city": "Omaha"
-    },
     {
       "gcCode": "GCBYRCQ",
       "name": "Lunch For a Little Cache Redux #64",
