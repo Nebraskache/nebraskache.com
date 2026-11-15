@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-14T08:24:19.135Z",
+  "updatedAt": "2026-11-15T08:28:01.293Z",
   "events": [
     {
       "gcCode": "GCBYRCQ",
@@ -17,21 +17,6 @@
       "city": "Lincoln"
     },
     {
-      "gcCode": "GCBZCVA",
-      "name": "Omaha Lunch #88",
-      "date": "2026-11-09T11:15:00.000Z",
-      "startTime": "2026-11-09T11:15:00.000Z",
-      "endTime": "2026-11-09T12:15:00.000Z",
-      "lat": 41.212037,
-      "lon": -96.080902,
-      "type": "Event Cache",
-      "placedBy": "TeamDAAK",
-      "placedByAccount": "TeamDAAK",
-      "url": "https://coord.info/GCBZCVA",
-      "state": "Nebraska",
-      "city": "Omaha"
-    },
-    {
       "gcCode": "GCBYPYW",
       "name": "Diners and Dives #95",
       "date": "2026-11-10T17:45:00.000Z",
@@ -45,21 +30,6 @@
       "url": "https://coord.info/GCBYPYW",
       "state": "Nebraska",
       "city": "Lincoln"
-    },
-    {
-      "gcCode": "GCBZRYB",
-      "name": "November GEo-Breakfast",
-      "date": "2026-11-14T08:00:00.000Z",
-      "startTime": "2026-11-14T08:00:00.000Z",
-      "endTime": "2026-11-14T09:00:00.000Z",
-      "lat": 41.265233,
-      "lon": -96.039317,
-      "type": "Event Cache",
-      "placedBy": "bhjalarson Monty12",
-      "placedByAccount": "bhjalarson",
-      "url": "https://coord.info/GCBZRYB",
-      "state": "Nebraska",
-      "city": "Omaha"
     },
     {
       "gcCode": "GCBZ7XM",
