@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-15T08:28:01.293Z",
+  "updatedAt": "2026-11-23T08:26:10.040Z",
   "events": [
     {
       "gcCode": "GCBYRCQ",
@@ -135,6 +135,21 @@
       "url": "https://coord.info/GCC0DB7",
       "state": "Nebraska",
       "city": "Omaha"
+    },
+    {
+      "gcCode": "GCC0R85",
+      "name": "Breakfast in the Tri Cites Hastings December 2026",
+      "date": "2026-12-12T09:00:00.000Z",
+      "startTime": "2026-12-12T09:00:00.000Z",
+      "endTime": "2026-12-12T10:00:00.000Z",
+      "lat": 40.596167,
+      "lon": -98.42535,
+      "type": "Event Cache",
+      "placedBy": "Contryguy",
+      "placedByAccount": "Contryguy",
+      "url": "https://coord.info/GCC0R85",
+      "state": "Nebraska",
+      "city": "Hastings"
     },
     {
       "gcCode": "GCBZGVM",
